@@ -1,5 +1,5 @@
-resource "azurerm_key_vault" "vm-password-kv" {
-  name                        = "vm_creds_kv"
+resource "azurerm_key_vault" "vm_password_kv" {
+  name                        = "vm-creds-kv"
   location                    = azurerm_resource_group.main_cluster.location
   resource_group_name         = azurerm_resource_group.main_cluster.name
   enabled_for_disk_encryption = true
@@ -35,5 +35,5 @@ resource "random_password" "vm_password" {
 resource "azurerm_key_vault_secret" "vm_password_secret" {
   name         = "vmAdminPassword"
   value        = random_password.vm_password.result
-  key_vault_id = azurerm_key_vault.vm-password-kv.id
+  key_vault_id = azurerm_key_vault.vm_password_kv.id
 }
