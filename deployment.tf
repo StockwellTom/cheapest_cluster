@@ -34,7 +34,7 @@ resource "kubernetes_deployment" "sample_deployment" {
 
       spec {
         container {
-          image = "nginx:1.21.6"
+          image = "nginx:1.19"
           name  = "nginx-app"
 
           resources {
