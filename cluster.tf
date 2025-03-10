@@ -22,14 +22,12 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     }
   }
 
-  
-
   identity {
     type = "SystemAssigned"
   }
 
   network_profile {
     network_plugin    = "azure"
-    load_balancer_sku = "basic" # Basic SKU load balancer
+    load_balancer_sku = "standard" # Basic SKU load balancer
   }
 }
