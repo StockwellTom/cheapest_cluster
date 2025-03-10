@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "vm_password_kv" {
-  name                        = format("%s/%s","vm-creds-kv-",random_string.kv_suffix.result)
+  name                        = format("vm-creds-kv-%s", random_string.kv_suffix.result)
   location                    = azurerm_resource_group.main_cluster.location
   resource_group_name         = azurerm_resource_group.main_cluster.name
   enabled_for_disk_encryption = true
