@@ -69,7 +69,7 @@ resource "kubernetes_service" "sample_app_service" {
     type = "ClusterIP"
 
     selector = {
-      app = "nginx-sample"
+      test = "nginx-sample"
     }
 
     port {
