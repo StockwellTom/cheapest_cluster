@@ -14,13 +14,15 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     node_count           = 1
     vm_size              = "Standard_B2s" # Cheapest node size
     auto_scaling_enabled = false
+
+    upgrade_settings {
+      drain_timeout_in_minutes      = 0
+      max_surge                     = "10%"
+      node_soak_duration_in_minutes = 0
+    }
   }
 
-  upgrade_settings {
-    drain_timeout_in_minutes      = 0
-    max_surge                     = "10%"
-    node_soak_duration_in_minutes = 0
-  }
+  
 
   identity {
     type = "SystemAssigned"
