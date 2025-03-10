@@ -19,6 +19,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     name       = "default"
     node_count = 1
     vm_size    = "Standard_B2s"  # Cheapest node size
+    auto_scaling_enabled = false
   }
 
   identity {
