@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "vm_password_kv" {
-  name                        = "vm-creds-kv"
+  name                        = format("%s/%s","vm-creds-kv-",random_string.kv_suffix.result)
   location                    = azurerm_resource_group.main_cluster.location
   resource_group_name         = azurerm_resource_group.main_cluster.name
   enabled_for_disk_encryption = true
@@ -30,6 +30,11 @@ resource "azurerm_key_vault" "vm_password_kv" {
 resource "random_password" "vm_password" {
   length  = 16
   special = true
+}
+
+resource "random_string" "kv_suffix" {
+  length           = 8
+  special          = false
 }
 
 resource "azurerm_key_vault_secret" "vm_password_secret" {

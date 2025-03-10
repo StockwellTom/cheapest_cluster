@@ -36,7 +36,7 @@ resource "azurerm_network_interface" "cluster_nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "cluster_vm" {
-  name                = "cluster_vm"
+  name                = "cluster-vm"
   resource_group_name = azurerm_resource_group.main_cluster.name
   location            = azurerm_resource_group.main_cluster.location
   size                = "Standard_B2s"
@@ -61,11 +61,12 @@ resource "azurerm_linux_virtual_machine" "cluster_vm" {
   }
 }
 
-resource "azurerm_public_ip" "cluser_pip" {
-  name                = "cluser_pip"
+resource "azurerm_public_ip" "cluster_pip" {
+  name                = "cluster_pip"
   location            = azurerm_resource_group.main_cluster.location
   resource_group_name = azurerm_resource_group.main_cluster.name
-  allocation_method   = "Dynamic"
+  allocation_method = "Static"
+  sku               = "Standard"
 }
 
 resource "azurerm_lb" "cluster_lb" {
