@@ -77,6 +77,6 @@ resource "azurerm_lb" "cluster_lb" {
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
-    public_ip_address_id = azurerm_public_ip.cluser_pip.id
+    public_ip_address_id = azurerm_public_ip.cluster_pip.id
   }
 }
