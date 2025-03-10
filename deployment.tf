@@ -58,3 +58,23 @@ resource "kubernetes_deployment" "sample_deployment" {
     }
   }
 }
+
+resource "kubernetes_service" "sample_app_service" {
+  metadata {
+    name = "nginx-sample-service"
+    namespace = kubernetes_namespace.sample_namespace.id
+  }
+
+  spec {
+    type = "ClusterIP"
+
+    selector = {
+      app = "nginx-sample"
+    }
+
+    port {
+      port        = 80
+      target_port = 80
+    }
+  }
+}
