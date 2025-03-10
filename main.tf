@@ -9,76 +9,29 @@ resource "azurerm_resource_group" "main_cluster" {
   location = "West Europe"
 }
 
-resource "azurerm_virtual_network" "cluster_vnet" {
-  name                = "cluster_vnet"
-  address_space       = ["10.0.0.0/16"]
+resource "azurerm_kubernetes_cluster" "aks_cluster" {
+  name                = "my-aks-cluster"
   location            = azurerm_resource_group.main_cluster.location
   resource_group_name = azurerm_resource_group.main_cluster.name
-}
+  dns_prefix          = "myakscluster"
 
-resource "azurerm_subnet" "cluster_subnet" {
-  name                 = "cluster_subnet"
-  resource_group_name  = azurerm_resource_group.main_cluster.name
-  virtual_network_name = azurerm_virtual_network.cluster_vnet.name
-  address_prefixes     = ["10.0.1.0/24"]
-}
+  default_node_pool {
+    name       = "default"
+    node_count = 1
+    vm_size    = "Standard_B2s"  # Cheapest node size
+  }
 
-resource "azurerm_network_interface" "cluster_nic" {
-  name                = "cluster_nic"
-  location            = azurerm_resource_group.main_cluster.location
-  resource_group_name = azurerm_resource_group.main_cluster.name
+  identity {
+    type = "SystemAssigned"
+  }
 
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = azurerm_subnet.cluster_subnet.id
-    private_ip_address_allocation = "Dynamic"
+  network_profile {
+    network_plugin    = "azure"
+    load_balancer_sku = "Basic"  # Basic SKU load balancer
   }
 }
 
-resource "azurerm_linux_virtual_machine" "cluster_vm" {
-  name                = "cluster-vm"
-  resource_group_name = azurerm_resource_group.main_cluster.name
-  location            = azurerm_resource_group.main_cluster.location
-  size                = "Standard_B2s"
-
-  disable_password_authentication=false
-
-  admin_username = "adminuser"
-  admin_password = random_password.vm_password.result
-
-  network_interface_ids = [
-    azurerm_network_interface.cluster_nic.id,
-  ]
-
-  os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
-  }
-
-  source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
-    version   = "latest"
-  }
-}
-
-resource "azurerm_public_ip" "cluster_pip" {
-  name                = "cluster_pip"
-  location            = azurerm_resource_group.main_cluster.location
-  resource_group_name = azurerm_resource_group.main_cluster.name
-  allocation_method = "Static"
-  sku               = "Standard"
-}
-
-resource "azurerm_lb" "cluster_lb" {
-  name                = "cluster_lb"
-  location            = azurerm_resource_group.main_cluster.location
-  resource_group_name = azurerm_resource_group.main_cluster.name
-  sku                 = "Basic"
-
-  frontend_ip_configuration {
-    name                 = "PublicIPAddress"
-    public_ip_address_id = azurerm_public_ip.cluster_pip.id
-  }
+output "kube_config" {
+  value = azurerm_kubernetes_cluster.aks_cluster.kube_config_raw
+  sensitive = true
 }
