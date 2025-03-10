@@ -4,7 +4,7 @@ metadata:
   name: nginx-deployment
   namespace: flux-sample
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
