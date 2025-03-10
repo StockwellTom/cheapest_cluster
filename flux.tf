@@ -1,7 +1,13 @@
-resource "azurerm_kubernetes_cluster_extension" "flux" {
+resource "azurerm_resource_provider_registration" "kubernetes_configuration" {
+  name = "Microsoft.KubernetesConfiguration"
+}
+
+resource "azurerm_kubernetes_cluster_extension" "flux_extension" {
   name          = "flux"
   cluster_id    = azurerm_kubernetes_cluster.aks_cluster.id
   extension_type = "microsoft.flux"
+  
+  depends_on =[azurerm_resource_provider_registration.kubernetes_configuration]
 }
 
 resource "azurerm_kubernetes_flux_configuration" "k8s_flux" {
