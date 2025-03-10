@@ -41,6 +41,8 @@ resource "azurerm_linux_virtual_machine" "cluster_vm" {
   location            = azurerm_resource_group.main_cluster.location
   size                = "Standard_B2s"
 
+  disable_password_authentication=false
+
   admin_username = "adminuser"
   admin_password = random_password.vm_password.result
 
