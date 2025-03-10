@@ -7,6 +7,7 @@ resource "kubernetes_namespace" "sample_namespace" {
 resource "kubernetes_deployment" "sample_deployment" {
   metadata {
     name = "nginx-sample"
+    namespace = kubernetes_namespace.sample_namespace.id
     labels = {
       test = "nginx-sample"
     }
