@@ -6,13 +6,13 @@ resource "kubernetes_namespace" "sample_namespace" {
 
 resource "kubernetes_deployment" "sample_deployment" {
   metadata {
-    name = "nginx-sample"
+    name      = "nginx-sample"
     namespace = kubernetes_namespace.sample_namespace.id
     labels = {
       test = "nginx-sample"
     }
     annotations = {
-        deployed-by = "Terraform"
+      deployed-by = "Terraform"
     }
   }
 
@@ -61,7 +61,7 @@ resource "kubernetes_deployment" "sample_deployment" {
 
 resource "kubernetes_service" "sample_app_service" {
   metadata {
-    name = "nginx-sample-service"
+    name      = "nginx-sample-service"
     namespace = kubernetes_namespace.sample_namespace.id
   }
 
