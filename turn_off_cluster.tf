@@ -11,7 +11,8 @@ resource "azuread_service_principal" "cluster_app_sp" {
   owners                       = [data.azuread_client_config.current.object_id]
 }
 
-resource "azuread_service_principal_password" "cluster_app_sp_pass" {
-  service_principal_id = azuread_service_principal.cluster_app_sp.id
-  end_date             = "2299-12-30T23:00:00Z"
+resource "azurerm_role_assignment" "aks_sp_role_assignment" {
+  scope                = azurerm_kubernetes_cluster.aks_cluster.id
+  role_definition_name = "Contributor"
+  principal_id         = azuread_service_principal.cluster_app_sp.id
 }
