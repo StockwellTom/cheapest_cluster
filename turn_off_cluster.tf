@@ -1,7 +1,12 @@
-resource "azuread_application" "turn_off_cluster_app" {
+data "azuread_client_config" "current" {}
+
+resource "azuread_application" "cluster_app" {
   display_name = "turn_off_cluster_app"
+  owners       = [data.azuread_client_config.current.object_id]
 }
 
-resource "azuread_service_principal" "turn_off_cluster_sp" {
-  application_id = azuread_application.turn_off_cluster_app.application_id
+resource "azuread_service_principal" "cluster_app_sp" {
+  client_id                    = azuread_application.cluster_app.client_id
+  app_role_assignment_required = false
+  owners                       = [data.azuread_client_config.current.object_id]
 }
