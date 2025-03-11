@@ -14,5 +14,5 @@ resource "azuread_service_principal" "cluster_app_sp" {
 resource "azurerm_role_assignment" "aks_sp_role_assignment" {
   scope                = azurerm_kubernetes_cluster.aks_cluster.id
   role_definition_name = "Contributor"
-  principal_id         = azuread_service_principal.cluster_app_sp.id
+  principal_id         = azuread_service_principal.cluster_app_sp.client_id
 }
