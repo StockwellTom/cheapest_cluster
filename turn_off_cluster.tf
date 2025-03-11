@@ -10,3 +10,14 @@ resource "azuread_service_principal" "cluster_app_sp" {
   app_role_assignment_required = false
   owners                       = [data.azuread_client_config.current.object_id]
 }
+
+resource "azuread_service_principal_password" "cluster_app_sp_pass" {
+  service_principal_id = azuread_service_principal.example.id
+  value                = random_string.password.result
+  end_date             = "2299-12-30T23:00:00Z"
+}
+
+resource "random_string" "password" {
+  length  = 32
+  special = true
+}
