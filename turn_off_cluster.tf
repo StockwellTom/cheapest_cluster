@@ -12,7 +12,7 @@ resource "azuread_service_principal" "cluster_app_sp" {
 }
 
 resource "azuread_service_principal_password" "cluster_app_sp_pass" {
-  service_principal_id = azuread_service_principal.example.id
+  service_principal_id = azuread_service_principal.cluster_app_sp.id
   value                = random_string.password.result
   end_date             = "2299-12-30T23:00:00Z"
 }
