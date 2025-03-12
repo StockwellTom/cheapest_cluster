@@ -4,6 +4,10 @@ provider "azurerm" {
   resource_provider_registrations = "none"
 }
 
+provider "azuread" {
+  tenant_id = "9c3053bb-1522-475e-82b2-b426b68a8004"
+}
+
 # provider "kubernetes" {
 #   host                   = azurerm_kubernetes_cluster.aks_cluster.kube_config.0.host
 #   client_certificate     = base64decode(azurerm_kubernetes_cluster.aks_cluster.kube_config.0.client_certificate)
