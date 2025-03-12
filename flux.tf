@@ -23,7 +23,7 @@ resource "azurerm_kubernetes_flux_configuration" "k8s_flux" {
 
   kustomizations {
     name                     = "kustomization-2"
-    path                     = "./flux/sample_app2"
+    path                     = "./flux/"
     sync_interval_in_seconds = 60
     retry_interval_in_seconds = 60
   }
