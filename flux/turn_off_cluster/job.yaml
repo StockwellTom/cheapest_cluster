@@ -1,19 +1,20 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: hello-world-cronjob
+  name: python-job
   namespace: turn-off-cluster
 spec:
-  schedule: "*/5 * * * *"  # Every 5 minutes
+  schedule: "0 20 * * * "  # Every 5 minutes
+  suspend: true
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: hello-world
-            image: busybox
-            args:
+            image: python:3.12-slim
+            command:
             - /bin/sh
             - -c
-            - echo "hello world"
+            - pip install azure-identity azure-mgmt-containerservice && sleep 600
           restartPolicy: OnFailure
