@@ -4,7 +4,7 @@ metadata:
   name: python-job
   namespace: turn-off-cluster
 spec:
-  schedule: "0 20 * * *"  # Every 5 minutes
+  schedule: "45 13 * * *"  # Every 5 minutes
   suspend: true
   jobTemplate:
     spec:
