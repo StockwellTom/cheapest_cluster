@@ -4,12 +4,16 @@ metadata:
   name: python-job
   namespace: turn-off-cluster
 spec:
-  schedule: "0 20 * * * "  # Every 5 minutes
+  schedule: "0 20 * * *"  # Every 5 minutes
   suspend: true
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            azure.workload.identity/use: "true"  # Required label for workload identity
         spec:
+          serviceAccountName: turn-off-cluster-mi
           containers:
           - name: hello-world
             image: python:3.12-slim
