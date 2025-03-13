@@ -3,11 +3,11 @@ resource "azurerm_resource_provider_registration" "kubernetes_configuration" {
 }
 
 resource "azurerm_kubernetes_cluster_extension" "flux_extension" {
-  name          = "flux"
-  cluster_id    = azurerm_kubernetes_cluster.aks_cluster.id
+  name           = "flux"
+  cluster_id     = azurerm_kubernetes_cluster.aks_cluster.id
   extension_type = "microsoft.flux"
 
-  depends_on =[azurerm_resource_provider_registration.kubernetes_configuration]
+  depends_on = [azurerm_resource_provider_registration.kubernetes_configuration]
 }
 
 resource "azurerm_kubernetes_flux_configuration" "k8s_flux" {
@@ -22,12 +22,12 @@ resource "azurerm_kubernetes_flux_configuration" "k8s_flux" {
   }
 
   kustomizations {
-    name                     = "kustomization-2"
-    path                     = "./flux/"
-    sync_interval_in_seconds = 60
+    name                      = "kustomization-2"
+    path                      = "./flux/"
+    sync_interval_in_seconds  = 60
     retry_interval_in_seconds = 60
   }
 
-  scope = "cluster"
+  scope      = "cluster"
   depends_on = [azurerm_kubernetes_cluster_extension.flux_extension]
 }

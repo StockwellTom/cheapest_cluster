@@ -4,10 +4,12 @@ resource "azurerm_resource_group" "main_cluster" {
 }
 
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
-  name                = "my-aks-cluster"
-  location            = azurerm_resource_group.main_cluster.location
-  resource_group_name = azurerm_resource_group.main_cluster.name
-  dns_prefix          = "myakscluster"
+  name                      = "my-aks-cluster"
+  location                  = azurerm_resource_group.main_cluster.location
+  resource_group_name       = azurerm_resource_group.main_cluster.name
+  dns_prefix                = "myakscluster"
+  workload_identity_enabled = true
+  oidc_issuer_enabled       = true
 
   default_node_pool {
     name                 = "default"
