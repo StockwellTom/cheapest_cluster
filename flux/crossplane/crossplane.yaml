@@ -18,6 +18,7 @@ metadata:
   name: crossplane-system
   namespace: crossplane-system
 spec:
+  interval: 10m  # Add the interval field here
   chart:
     spec:
       chart: crossplane
