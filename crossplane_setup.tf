@@ -6,5 +6,5 @@ data "azurerm_user_assigned_identity" "cluster_mi" {
 resource "azurerm_role_assignment" "crossplane_mi_owner" {
   scope                = "/subscriptions/b133cf1b-9061-473a-a041-99c71f10c773"
   role_definition_name = "Owner"
-  principal_id         = azurerm_user_assigned_identity.cluster_mi.principal_id
+  principal_id         = data.azurerm_user_assigned_identity.cluster_mi.principal_id
 }
