@@ -38,7 +38,10 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
-  name: aks-d-devops2-uks
+  name: default
 spec:
   credentials:
-    source: InjectedIdentity
+    source: UserAssignedManagedIdentity
+  clientID: "efb4cccd-ae27-4143-bcad-a5ff07fea049"
+  subscriptionID: "b133cf1b-9061-473a-a041-99c71f10c773"
+  tenantID: "9c3053bb-1522-475e-82b2-b426b68a8004"
