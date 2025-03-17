@@ -25,8 +25,11 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   }
 
   identity {
-    type = "UserAssigned"
-    identity_ids = [azurerm_user_assigned_identity.crossplane_mi.id]
+    type = "SystemAssigned"
+  }
+
+  kubelet_identity {
+    client_id  = "ad9bdbcf-02a8-4fb7-b1d5-d11c8c2cffaf"
   }
 
   network_profile {
