@@ -7,7 +7,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
   name: crossplane-stable
-  namespace: crossplane-system
+  namespace: flux-system
 spec:
   url: https://charts.crossplane.io/stable
   interval: 10m
@@ -16,8 +16,9 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: crossplane-system
-  namespace: crossplane-system
+  namespace: flux-system
 spec:
+  targetNamespace: crossplane-system
   interval: 10m  # Add the interval field here
   chart:
     spec:
@@ -25,4 +26,4 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: crossplane-stable
-        namespace: crossplane-system
+        namespace: flux-system
