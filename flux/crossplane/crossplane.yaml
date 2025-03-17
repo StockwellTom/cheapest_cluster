@@ -28,3 +28,13 @@ spec:
         name: crossplane-stable
         namespace: flux-system
 ---
+apiVersion: azure.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  clientID: 03d6c4de-c756-4f11-bf39-f5bd80389a46
+  credentials:
+    source: UserAssignedManagedIdentity
+  subscriptionID: 1496eaa0-6abc-4267-b97e-b4c783835843
+  tenantID: 7f59c7fb-4f18-4987-ba40-7410bd850974

@@ -1,6 +1,6 @@
 resource "azurerm_user_assigned_identity" "crossplane_mi" {
   location            = azurerm_resource_group.main_cluster.location
-  name                = "cluster_contributor"
+  name                = "crossplane_sub_owner"
   resource_group_name = azurerm_resource_group.main_cluster.name
 }
 
