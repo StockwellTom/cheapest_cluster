@@ -11,7 +11,7 @@ resource "azuread_service_principal_password" "crossplane-sp-password-assign" {
 }
 
 resource "azurerm_role_assignment" "crossplane-ra" {
-  principal_id   = azuread_service_principal.crossplane-sp.id
+  principal_id   = azuread_service_principal.crossplane-sp.object_id
   role_definition_name = "Owner"
   scope          = "/subscriptions/b133cf1b-9061-473a-a041-99c71f10c773"
 }
