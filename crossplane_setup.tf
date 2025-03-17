@@ -43,8 +43,8 @@ resource "azurerm_key_vault" "crossplane-kv" {
     object_id = "1a45d9e9-6f0d-44f0-8154-233711b1ad2f" # Replace with your Azure AD object ID
 
     secret_permissions = [
-      "get",
-      "list",
+      "Get",
+      "List",
     ]
   }
 }
