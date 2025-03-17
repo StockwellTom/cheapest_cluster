@@ -27,3 +27,15 @@ spec:
         kind: HelmRepository
         name: crossplane-stable
         namespace: flux-system
+---
+apiVersion: azure.upbound.io/v1beta1
+metadata:
+  name: default
+kind: ProviderConfig
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: azure-secret
+      key: creds
