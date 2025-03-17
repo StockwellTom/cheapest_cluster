@@ -3,7 +3,7 @@ resource "azuread_application" "crossplane-app" {
 }
 
 resource "azuread_service_principal" "crossplane-sp" {
-  application_id = azuread_application.crossplane-app.application_id
+  client_id = azuread_application.crossplane-app.client_id
 }
 
 resource "random_password" "crossplane-sp-password" {
