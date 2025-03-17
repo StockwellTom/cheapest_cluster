@@ -44,6 +44,6 @@ resource "azurerm_key_vault" "crossplane-kv" {
 
 resource "azurerm_key_vault_secret" "crossplane-kv-secret" {
   name         = "crossplane-password"
-  value        = azuread_service_principal_password.crossplane-sp-password-assign.vault
+  value        = azuread_service_principal_password.crossplane-sp-password-assign.value
   key_vault_id = azurerm_key_vault.crossplane-kv.id
 }
