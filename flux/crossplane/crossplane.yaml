@@ -33,8 +33,5 @@ kind: ProviderConfig
 metadata:
   name: aks-d-devops2-uks
 spec:
-  clientID: ad9bdbcf-02a8-4fb7-b1d5-d11c8c2cffaf
   credentials:
-    source: UserAssignedManagedIdentity
-  subscriptionID: b133cf1b-9061-473a-a041-99c71f10c773
-  tenantID: 9c3053bb-1522-475e-82b2-b426b68a8004
+    source: InjectedIdentity
