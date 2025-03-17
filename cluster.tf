@@ -26,7 +26,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 
   identity {
     type = "UserAssigned"
-    user_assigned_identity_id = azurerm_user_assigned_identity.crossplane_mi.id
+    identity_ids = [azurerm_user_assigned_identity.crossplane_mi.id]
   }
 
   network_profile {
