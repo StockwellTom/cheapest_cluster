@@ -29,7 +29,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     identity_ids = [azurerm_user_assigned_identity.crossplane_mi.id]
   }
 
-  kubelet_identity = {
+  kubelet_identity {
     client_id = azurerm_user_assigned_identity.crossplane_mi.client_id
   }
 
