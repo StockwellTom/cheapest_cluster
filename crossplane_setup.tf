@@ -49,7 +49,7 @@ resource "azurerm_key_vault" "crossplane-kv" {
   }
 }
 
-resource "azurerm_key_vault_secret" "example" {
+resource "azurerm_key_vault_secret" "crossplane-kv-secret" {
   name         = "crossplane-password"
   value        = random_password.crossplane-sp-password.result
   key_vault_id = azurerm_key_vault.crossplane-kv.id
