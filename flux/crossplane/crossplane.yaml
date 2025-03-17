@@ -26,3 +26,17 @@ spec:
         kind: HelmRepository
         name: crossplane-stable
         namespace: crossplane-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: flux-applier-rolebinding
+  namespace: crossplane-system
+subjects:
+- kind: ServiceAccount
+  name: flux-applier
+  namespace: crossplane-system
+roleRef:
+  kind: Role
+  name: secret-reader
+  apiGroup: rbac.authorization.k8s.io
