@@ -38,6 +38,7 @@ resource "azurerm_key_vault" "crossplane-kv" {
     secret_permissions = [
       "Get",
       "List",
+      "Set"
     ]
   }
 }
