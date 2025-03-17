@@ -6,15 +6,8 @@ resource "azuread_service_principal" "crossplane-sp" {
   client_id = azuread_application.crossplane-app.client_id
 }
 
-resource "random_password" "crossplane-sp-password" {
-  length  = 16
-  special = true
-}
-
 resource "azuread_service_principal_password" "crossplane-sp-password-assign" {
   service_principal_id = azuread_service_principal.crossplane-sp.id
-  value                = random_password.crossplane-sp-password.result
-  end_date             = "2099-01-01T00:00:00Z"
 }
 
 resource "azurerm_role_assignment" "crossplane-ra" {
@@ -51,6 +44,6 @@ resource "azurerm_key_vault" "crossplane-kv" {
 
 resource "azurerm_key_vault_secret" "crossplane-kv-secret" {
   name         = "crossplane-password"
-  value        = random_password.crossplane-sp-password.result
+  value        = azuread_service_principal_password.crossplane-sp-password-assign.result
   key_vault_id = azurerm_key_vault.crossplane-kv.id
 }
