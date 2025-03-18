@@ -28,6 +28,7 @@ resource "azurerm_kubernetes_flux_configuration" "k8s_flux" {
     path                      = "./flux/"
     sync_interval_in_seconds  = 60
     retry_interval_in_seconds = 60
+    timeout_in_seconds = 120
   }
 
   scope      = "cluster"
