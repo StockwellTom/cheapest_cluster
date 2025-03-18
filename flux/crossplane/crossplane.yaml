@@ -27,14 +27,11 @@ spec:
         kind: HelmRepository
         name: crossplane-stable
         namespace: flux-system
----
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
-metadata:
-  name: provider-azure-storage
-  namespace: crossplane-system
-spec:
-  package: xpkg.upbound.io/upbound/provider-azure-storage:v1
+  values:
+    provider:
+      packages:
+      - xpkg.upbound.io/upbound/provider-family-azure:v1.11.1
+      - xpkg.upbound.io/upbound/provider-azure-storage:v1
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ProviderConfig
