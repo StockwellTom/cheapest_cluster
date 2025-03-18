@@ -37,6 +37,7 @@ apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-azure-network
+  namespace: crossplane-system
 spec:
   package: xpkg.crossplane.io/crossplane-contrib/provider-azure-network:v1.11.2
 ---
@@ -44,6 +45,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
   name: default
+  namespace: crossplane-system
 spec:
   credentials:
     source: UserAssignedManagedIdentity
@@ -55,6 +57,7 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
   name: my-crossplaned-sa
+  namespace: crossplane-system
 spec:
   forProvider:
     accountKind: StorageV2
