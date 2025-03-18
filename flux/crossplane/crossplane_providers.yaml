@@ -6,7 +6,7 @@ metadata:
 spec:
   credentials:
     source: UserAssignedManagedIdentity
-  clientID: "efb4cccd-ae27-4143-bcad-a5ff07fea049"
+  clientID: "bb15cfc3-538c-4873-bc31-392e503dde14"
   subscriptionID: "b133cf1b-9061-473a-a041-99c71f10c773"
   tenantID: "9c3053bb-1522-475e-82b2-b426b68a8004"
 ---
