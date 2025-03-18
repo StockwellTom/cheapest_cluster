@@ -19,6 +19,8 @@ resource "azurerm_kubernetes_flux_configuration" "k8s_flux" {
     url             = "https://github.com/StockwellTom/cheapest_cluster"
     reference_type  = "branch"
     reference_value = "master"
+    sync_interval_in_seconds = 60
+    timeout_in_seconds = 120
   }
 
   kustomizations {
