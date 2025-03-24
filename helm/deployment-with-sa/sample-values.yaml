@@ -1,0 +1,5 @@
+replicaCount: 2
+includeStorageAccount: true
+storageAccount:
+  resourceGroupName: main_cluster
+  storageAccountName: deployed_from_helm_sa

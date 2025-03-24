@@ -1,0 +1,19 @@
+{{- if .Values.includeStorageAccount }}
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: {{ .Values.storageAccount.storageAccountName }}
+  namespace: crossplane-system
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    allowNestedItemsToBePublic: false
+    isHnsEnabled: true
+    location: UK South
+    publicNetworkAccessEnabled: false
+    resourceGroupName: {{ .Values.storageAccount.resourceGroupName }}
+  providerConfigRef:
+    name: default
+{{- end }}
