@@ -4,7 +4,6 @@ metadata:
   name: {{ include "deployment-with-sa.fullname" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "deployment-with-sa.selectorLabels" . | nindent 6 }}
