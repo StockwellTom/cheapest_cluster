@@ -2,22 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "deployment-with-sa.fullname" . }}
+  labels:
+    {{- include "deployment-with-sa.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "deployment-with-sa.selectorLabels" . | nindent 6 }}
+      {{- include "deployment-with-sa.selectorLabels" . | nindent 8 }}
   template:
+    metadata:
+      labels:
+        {{- include "deployment-with-sa.selectorLabels" . | nindent 12 }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          {{- with .Values.securityContext }}
-          securityContext:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
