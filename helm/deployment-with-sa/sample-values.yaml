@@ -2,4 +2,4 @@ replicaCount: 2
 includeStorageAccount: true
 storageAccount:
   resourceGroupName: main_cluster
-  storageAccountName: deployed-from-helm-sa
+  storageAccountName: deployedfromhelmsa
