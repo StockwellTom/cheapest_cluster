@@ -27,26 +27,3 @@ spec:
     resourceGroupName: main_cluster
   providerConfigRef:
     name: default
----
-apiVersion: managedidentity.azure.upbound.io/v1beta1
-kind: UserAssignedIdentity
-metadata:
-  name: newmi
-spec:
-  forProvider:
-    location: West Europe
-    name: crossplanedmanagedidentity
-    resourceGroupName: main_cluster
----
-apiVersion: managedidentity.azure.upbound.io/v1beta1
-kind: FederatedIdentityCredential
-metadata:
-  name: newmifederated
-spec:
-  forProvider:
-    audience:
-      - "api://AzureADTokenExchange"
-    issuer: "https://westeurope.oic.prod-aks.azure.com/9c3053bb-1522-475e-82b2-b426b68a8004/61cd0ea9-54c9-4949-875f-530f3013b097/"
-    parentIdRef: newmi
-    resourceGroupName: main_cluster
-    subject: "system:serviceaccount:default:federated-creds"
